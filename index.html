@@ -14,6 +14,13 @@
             align-items: center;
         }
 
+        #play-pause-button, #reset-button{
+
+            scale: 1.3;
+            margin: 10px;
+
+        }
+
         .hide{
             display: none !important;
         }
@@ -40,7 +47,7 @@
                     <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"/>
                 </svg>
             </button>
-            <button type="button" class="btn btn-secondary" onclick="resetStopwatch()">
+            <button type="button" id="reset-button" class="btn btn-secondary" onclick="resetStopwatch()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"></path>
