@@ -13,6 +13,10 @@
             justify-content: center;
             align-items: center;
         }
+
+        .hide{
+            display: none !important;
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -25,15 +29,18 @@
         <h1 class="mt-5 mb-5">Stopwatch</h1>
         <div class="mt-5 display-3" id="stopwatch">00:00:00.00</div>
         <div class="buttons-box mt-5">
-            <button type="button" class="btn btn-success" onclick="startStopwatch()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            <button type="button" id="play-pause-button" class="btn btn-success" onclick="startStopwatch()">
+                <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-play-fill" viewBox="0 0 16 16">
                     <path
                         d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393">
                     </path>
                 </svg>
+                <svg id="pause-icon" class="hide" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pause-fill" viewBox="0 0 16 16">
+                    <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"/>
+                </svg>
             </button>
-            <button type="button" class="btn btn-secondary">
+            <button type="button" class="btn btn-secondary" onclick="resetStopwatch()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2z"></path>
@@ -69,10 +76,48 @@
 
         }
 
+        function resetStopwatch(){
+            let playPauseButton = document.getElementById('play-pause-button')
+            let playIcon = document.getElementById('play-icon');
+            let pauseIcon = document.getElementById('pause-icon');
+
+            updateStopwatch('00:00:00.00');
+
+            playPauseButton.classList.add('btn-success');
+            playPauseButton.classList.remove('btn-danger');
+            playIcon.classList.remove('hide');
+            pauseIcon.classList.add('hide');
+
+            stopwatchOn = false;
+            clearInterval(stopwatch);
+        }
+
         function startStopwatch(){
+            let playPauseButton = document.getElementById('play-pause-button')
+            let playIcon = document.getElementById('play-icon');
+            let pauseIcon = document.getElementById('pause-icon');
+
             if(!stopwatchOn){
+
+                playPauseButton.classList.remove('btn-success');
+                playPauseButton.classList.add('btn-danger');
+
+                playIcon.classList.add('hide');
+                pauseIcon.classList.remove('hide');
+
                 stopwatchOn = true;
                 stopwatch = setInterval(runStopwatch, 10);
+
+
+            }else{
+
+                playPauseButton.classList.add('btn-success');
+                playPauseButton.classList.remove('btn-danger');
+                playIcon.classList.remove('hide');
+                pauseIcon.classList.add('hide');
+
+                stopwatchOn = false;
+                clearInterval(stopwatch);
             }
         }
 
